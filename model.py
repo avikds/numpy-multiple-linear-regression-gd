@@ -131,8 +131,26 @@ def add_bias_column(X):
     bias = np.ones((X.shape[0], 1))
     return np.hstack((bias, X))
 
-# Step 6 - prepare_design_matrix (not yet solved)
-# TODO: implement
+# Step 6 - prepare_design_matrix
+def prepare_design_matrix(X, mean, std):
+    """Standardize features and prepend a bias column.
+
+    Parameters
+    ----------
+    X : np.ndarray, shape (n, d)
+        Feature matrix.
+    mean : np.ndarray, shape (d,)
+        Per-feature means computed from the training data.
+    std : np.ndarray, shape (d,)
+        Per-feature standard deviations computed from the training data.
+
+    Returns
+    -------
+    np.ndarray, shape (n, d + 1)
+        Standardized design matrix with a leading column of ones.
+    """
+    X_standardized = standardize_features(X, mean, std)
+    return add_bias_column(X_standardized)
 
 # Step 7 - predict_linear (not yet solved)
 # TODO: implement
