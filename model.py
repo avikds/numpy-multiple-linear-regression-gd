@@ -544,8 +544,38 @@ def weights_l2_distance(w_gd, w_closed):
     """
     return float(np.linalg.norm(w_gd - w_closed))
 
-# Step 24 - create_lr_model (not yet solved)
-# TODO: implement
+# Step 24 - create_lr_model
+def create_lr_model(learning_rate=0.01, epochs=1000, patience=50, seed=0):
+    """Build the initial LinearRegressionGD-style model dictionary.
+
+    Parameters
+    ----------
+    learning_rate : float, optional
+        Gradient descent learning rate.
+    epochs : int, optional
+        Maximum number of training epochs.
+    patience : int, optional
+        Early-stopping patience.
+    seed : int, optional
+        Random seed for weight initialization.
+
+    Returns
+    -------
+    dict
+        Unfitted linear regression model state.
+    """
+    return {
+        "learning_rate": learning_rate,
+        "epochs": epochs,
+        "patience": patience,
+        "seed": seed,
+        "weights": None,
+        "normal_weights": None,
+        "mean": None,
+        "std": None,
+        "train_losses": [],
+        "val_losses": [],
+    }
 
 # Step 25 - fit_lr_model (not yet solved)
 # TODO: implement
