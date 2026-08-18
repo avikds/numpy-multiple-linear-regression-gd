@@ -231,11 +231,9 @@ def initialize_weights(n_features, seed=None):
         Randomly initialized weight vector.
     """
     if seed is not None:
-        rng = np.random.default_rng(seed)
-    else:
-        rng = np.random.default_rng()
+        np.random.seed(seed)
 
-    return rng.normal(loc=0.0, scale=0.01, size=n_features)
+    return np.random.normal(loc=0.0, scale=0.01, size=n_features)
 
 # Step 12 - gd_step
 def gd_step(X, y, weights, lr):
@@ -320,8 +318,34 @@ def update_early_stop_state(
 
     return best_val_loss, wait, best_weights, stop
 
-# Step 15 - init_training_state (not yet solved)
-# TODO: implement
+# Step 15 - init_training_state
+def init_training_state(n_features, seed=None):
+    """Build the initial training-state dictionary for batch GD.
+
+    Parameters
+    ----------
+    n_features : int
+        Number of model weights.
+    seed : int or None, optional
+        Random seed used to initialize the weights.
+
+    Returns
+    -------
+    dict
+        Initial training state containing weights, early-stopping state,
+        loss histories, and stopped flag.
+    """
+    weights = initialize_weights(n_features, seed=seed)
+
+    return {
+        "weights": weights,
+        "best_weights": weights.copy(),
+        "best_val_loss": np.inf,
+        "wait": 0,
+        "train_losses": [],
+        "val_losses": [],
+        "stopped": False,
+    }
 
 # Step 16 - run_one_epoch (not yet solved)
 # TODO: implement
