@@ -39,6 +39,18 @@ python scaffold.py
 - [x] **27.** score_lr_model
 - [x] **28.** compare_with_normal_equation
 
----
+## Results
 
-Built on Deep-ML.
+**Splits:** 90 30 30
+
+**Sample preds:** [-4.9349 -2.1614 -1.1088 -3.5913  1.7047]
+
+**Sample trues:** [-4.8688 -2.2391 -0.8235 -3.5582  1.6763]
+
+**Test MAE/RMSE/R2:** {'mae': 0.09220147681923264, 'rmse': 0.12202512653831676, 'r2': 0.9985479787094949}
+
+**GD vs normal-eq L2 gap:** 0.005860423059766929
+
+**Final train/val MSE:** 0.010137750731524809 0.012253596422242757
+
+**Epochs run:** 81
