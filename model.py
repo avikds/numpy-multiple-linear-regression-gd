@@ -661,8 +661,29 @@ def predict_lr_model(model, X):
 
     return predict_linear(X_design, model["weights"])
 
-# Step 27 - score_lr_model (not yet solved)
-# TODO: implement
+# Step 27 - score_lr_model
+import numpy as np
+
+def score_lr_model(model, X, y):
+    """Predict on raw features and return regression metrics.
+
+    Parameters
+    ----------
+    model : dict
+        Fitted linear regression model.
+    X : np.ndarray
+        Raw feature matrix.
+    y : np.ndarray
+        True target values.
+
+    Returns
+    -------
+    dict
+        Dictionary containing MAE, RMSE, and R^2 metrics.
+    """
+    y_pred = predict_lr_model(model, X)
+
+    return evaluate_regression(y, y_pred)
 
 # Step 28 - compare_with_normal_equation (not yet solved)
 # TODO: implement
