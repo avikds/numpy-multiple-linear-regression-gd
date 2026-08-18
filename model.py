@@ -577,8 +577,67 @@ def create_lr_model(learning_rate=0.01, epochs=1000, patience=50, seed=0):
         "val_losses": [],
     }
 
-# Step 25 - fit_lr_model (not yet solved)
-# TODO: implement
+# Step 25 - fit_lr_model
+def fit_lr_model(model, X_train, y_train, X_val, y_val):
+    """Fit model with train stats, design matrices, GD, and normal eq.
+
+    Parameters
+    ----------
+    model : dict
+        Linear regression model dictionary containing hyperparameters.
+    X_train : np.ndarray
+        Raw training feature matrix.
+    y_train : np.ndarray
+        Training targets.
+    X_val : np.ndarray
+        Raw validation feature matrix.
+    y_val : np.ndarray
+        Validation targets.
+
+    Returns
+    -------
+    dict
+        The same model dictionary, updated with fitted parameters.
+    """
+    # Compute feature statistics using training data only
+    model["mean"], model["std"] = compute_feature_stats(X_train)
+
+    # Standardize features and add bias column
+    X_train_design = prepare_design_matrix(
+        X_train, model["mean"], model["std"]
+    )
+    X_val_design = prepare_design_matrix(
+        X_val, model["mean"], model["std"]
+    )
+
+    # Train with batch gradient descent and early stopping
+    (
+        model["weights"],
+        model["train_losses"],
+        model["val_losses"],
+    ) = train_batch_gd(
+        X_train_design,
+        y_train,
+        X_val_design,
+        y_val,
+        lr=model["learning_rate"],
+        epochs=model["epochs"],
+        patience=model["patience"],
+        seed=model["seed"],
+    )
+
+    # Solve the closed-form normal equation.
+    # If X^T X is singular, use least squares as a robust fallback.
+    try:
+        model["normal_weights"] = normal_equation(
+            X_train_design, y_train
+        )
+    except np.linalg.LinAlgError:
+        model["normal_weights"] = np.linalg.lstsq(
+            X_train_design, y_train, rcond=None
+        )[0]
+
+    return model
 
 # Step 26 - predict_lr_model (not yet solved)
 # TODO: implement
