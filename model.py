@@ -94,8 +94,25 @@ def compute_feature_stats(X):
 
     return mean, std
 
-# Step 4 - standardize_features (not yet solved)
-# TODO: implement
+# Step 4 - standardize_features
+def standardize_features(X, mean, std):
+    """Apply z-score normalization using precomputed feature statistics.
+
+    Parameters
+    ----------
+    X : np.ndarray, shape (n, d)
+        Feature matrix.
+    mean : np.ndarray, shape (d,)
+        Per-feature means computed from the training data.
+    std : np.ndarray, shape (d,)
+        Per-feature standard deviations computed from the training data.
+
+    Returns
+    -------
+    np.ndarray, shape (n, d)
+        Standardized feature matrix.
+    """
+    return (X - mean) / std
 
 # Step 5 - add_bias_column (not yet solved)
 # TODO: implement
