@@ -395,8 +395,59 @@ def run_one_epoch(state, X_train, y_train, X_val, y_val, lr, patience):
 
     return state
 
-# Step 17 - train_batch_gd (not yet solved)
-# TODO: implement
+# Step 17 - train_batch_gd
+def train_batch_gd(X_train, y_train, X_val, y_val, lr, epochs, patience, seed=None):
+    """Train weights with full-batch GD and early stopping.
+
+    Parameters
+    ----------
+    X_train : np.ndarray
+        Training design matrix.
+    y_train : np.ndarray
+        Training targets.
+    X_val : np.ndarray
+        Validation design matrix.
+    y_val : np.ndarray
+        Validation targets.
+    lr : float
+        Learning rate.
+    epochs : int
+        Maximum number of training epochs.
+    patience : int
+        Number of consecutive non-improving validation epochs allowed.
+    seed : int or None
+        Random seed used only for weight initialization.
+
+    Returns
+    -------
+    weights : np.ndarray
+        Best weights found during training.
+    train_losses : list
+        Training MSE history.
+    val_losses : list
+        Validation MSE history.
+    """
+    state = init_training_state(X_train.shape[1], seed=seed)
+
+    for _ in range(epochs):
+        state = run_one_epoch(
+            state,
+            X_train,
+            y_train,
+            X_val,
+            y_val,
+            lr,
+            patience,
+        )
+
+        if state["stopped"]:
+            break
+
+    return (
+        state["best_weights"],
+        state["train_losses"],
+        state["val_losses"],
+    )
 
 # Step 18 - mean_absolute_error (not yet solved)
 # TODO: implement
