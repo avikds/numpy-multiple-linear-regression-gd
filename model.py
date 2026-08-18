@@ -449,8 +449,18 @@ def train_batch_gd(X_train, y_train, X_val, y_val, lr, epochs, patience, seed=No
         state["val_losses"],
     )
 
-# Step 18 - mean_absolute_error (not yet solved)
-# TODO: implement
+# Step 18 - mean_absolute_error
+def mean_absolute_error(y_true, y_pred):
+    """Compute the mean absolute error between true targets and predictions.
+
+    Args:
+        y_true: True target values.
+        y_pred: Predicted target values.
+
+    Returns:
+        Mean absolute error as a scalar float.
+    """
+    return float(np.mean(np.abs(y_true - y_pred)))
 
 # Step 19 - root_mean_squared_error (not yet solved)
 # TODO: implement
