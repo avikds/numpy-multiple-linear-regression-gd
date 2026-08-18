@@ -178,8 +178,20 @@ def mse_loss(y_true, y_pred):
     """
     return float(np.mean((y_true - y_pred) ** 2))
 
-# Step 9 - mse_gradient (not yet solved)
-# TODO: implement
+# Step 9 - mse_gradient
+def mse_gradient(X, y_true, y_pred):
+    """Compute the analytic gradient of MSE with respect to model weights.
+
+    Args:
+        X: Design matrix of shape (n, d_in).
+        y_true: True target values of shape (n,).
+        y_pred: Model predictions of shape (n,).
+
+    Returns:
+        Gradient vector of shape (d_in,).
+    """
+    n = X.shape[0]
+    return (2.0 / n) * (X.T @ (y_pred - y_true))
 
 # Step 10 - normal_equation (not yet solved)
 # TODO: implement
