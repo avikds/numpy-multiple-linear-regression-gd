@@ -514,8 +514,22 @@ def evaluate_regression(y_true, y_pred):
         "r2": r_squared(y_true, y_pred),
     }
 
-# Step 22 - learning_curve_data (not yet solved)
-# TODO: implement
+# Step 22 - learning_curve_data
+def learning_curve_data(train_losses, val_losses):
+    """Return epoch indices and loss series for external plotting.
+
+    Args:
+        train_losses: Training loss sequence.
+        val_losses: Validation loss sequence.
+
+    Returns:
+        Tuple of (epochs, train, val) as plain Python lists.
+    """
+    epochs = list(range(1, len(train_losses) + 1))
+    train = np.asarray(train_losses).tolist()
+    val = np.asarray(val_losses).tolist()
+
+    return epochs, train, val
 
 # Step 23 - weights_l2_distance (not yet solved)
 # TODO: implement
