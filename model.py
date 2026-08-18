@@ -34,8 +34,42 @@ def shuffle_xy(X, y, seed=42):
 
     return X_shuffled, y_shuffled
 
-# Step 2 - split_train_val_test (not yet solved)
-# TODO: implement
+# Step 2 - split_train_val_test
+def split_train_val_test(X, y, train_frac=0.6, val_frac=0.2):
+    """Split already-shuffled data into train, validation, and test sets.
+
+    Parameters
+    ----------
+    X : np.ndarray, shape (n, d)
+        Feature matrix.
+    y : np.ndarray, shape (n,)
+        Target vector.
+    train_frac : float, optional
+        Fraction of data for training (default 0.6).
+    val_frac : float, optional
+        Fraction of data for validation (default 0.2).
+
+    Returns
+    -------
+    X_train, y_train : training data
+    X_val, y_val : validation data
+    X_test, y_test : test data
+    """
+    n = X.shape[0]
+
+    n_train = int(n * train_frac)
+    n_val = int(n * val_frac)
+
+    X_train = X[:n_train]
+    y_train = y[:n_train]
+
+    X_val = X[n_train:n_train + n_val]
+    y_val = y[n_train:n_train + n_val]
+
+    X_test = X[n_train + n_val:]
+    y_test = y[n_train + n_val:]
+
+    return X_train, y_train, X_val, y_val, X_test, y_test
 
 # Step 3 - compute_feature_stats (not yet solved)
 # TODO: implement
