@@ -29,8 +29,8 @@ python scaffold.py
 - [x] **17.** train_batch_gd
 - [x] **18.** mean_absolute_error
 - [x] **19.** root_mean_squared_error
-- [ ] **20.** r_squared
-- [ ] **21.** evaluate_regression
+- [x] **20.** r_squared
+- [x] **21.** evaluate_regression
 - [ ] **22.** learning_curve_data
 - [ ] **23.** weights_l2_distance
 - [ ] **24.** create_lr_model

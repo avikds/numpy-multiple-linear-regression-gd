@@ -475,11 +475,44 @@ def root_mean_squared_error(y_true, y_pred):
     """
     return float(np.sqrt(np.mean((y_true - y_pred) ** 2)))
 
-# Step 20 - r_squared (not yet solved)
-# TODO: implement
+# Step 20 - r_squared
+def r_squared(y_true, y_pred):
+    """Compute the coefficient of determination R^2.
 
-# Step 21 - evaluate_regression (not yet solved)
-# TODO: implement
+    Args:
+        y_true: True target values.
+        y_pred: Predicted target values.
+
+    Returns:
+        R^2 score as a scalar float.
+        Returns nan when the total sum of squares is zero.
+    """
+    residual_sum_of_squares = np.sum((y_true - y_pred) ** 2)
+    total_sum_of_squares = np.sum((y_true - np.mean(y_true)) ** 2)
+
+    if total_sum_of_squares == 0:
+        return float("nan")
+
+    return float(
+        1.0 - residual_sum_of_squares / total_sum_of_squares
+    )
+
+# Step 21 - evaluate_regression
+def evaluate_regression(y_true, y_pred):
+    """Bundle MAE, RMSE, and R^2 into a metrics dictionary.
+
+    Args:
+        y_true: True target values of shape (n,).
+        y_pred: Predicted target values of shape (n,).
+
+    Returns:
+        Dictionary containing 'mae', 'rmse', and 'r2' metrics.
+    """
+    return {
+        "mae": mean_absolute_error(y_true, y_pred),
+        "rmse": root_mean_squared_error(y_true, y_pred),
+        "r2": r_squared(y_true, y_pred),
+    }
 
 # Step 22 - learning_curve_data (not yet solved)
 # TODO: implement
