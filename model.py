@@ -277,8 +277,48 @@ def epoch_train_val_losses(X_train, y_train, X_val, y_val, weights):
 
     return train_loss, val_loss
 
-# Step 14 - update_early_stop_state (not yet solved)
-# TODO: implement
+# Step 14 - update_early_stop_state
+def update_early_stop_state(
+    val_loss, best_val_loss, wait, weights, best_weights, patience
+):
+    """Update early-stopping state after a validation evaluation.
+
+    Parameters
+    ----------
+    val_loss : float
+        Current validation loss.
+    best_val_loss : float
+        Best validation loss seen so far.
+    wait : int
+        Number of consecutive evaluations without improvement.
+    weights : np.ndarray
+        Current model weights.
+    best_weights : np.ndarray
+        Best model weights seen so far.
+    patience : int
+        Number of consecutive non-improving evaluations allowed.
+
+    Returns
+    -------
+    best_val_loss : float
+        Updated best validation loss.
+    wait : int
+        Updated wait counter.
+    best_weights : np.ndarray
+        Updated best weights.
+    stop : bool
+        Whether early stopping should occur.
+    """
+    if val_loss < best_val_loss:
+        best_val_loss = val_loss
+        wait = 0
+        best_weights = weights.copy()
+        stop = False
+    else:
+        wait += 1
+        stop = wait >= patience
+
+    return best_val_loss, wait, best_weights, stop
 
 # Step 15 - init_training_state (not yet solved)
 # TODO: implement
