@@ -214,8 +214,28 @@ def normal_equation(X, y):
 
     return np.linalg.solve(XtX, Xty)
 
-# Step 11 - initialize_weights (not yet solved)
-# TODO: implement
+# Step 11 - initialize_weights
+def initialize_weights(n_features, seed=None):
+    """Initialize weights from a normal distribution N(0, 0.01).
+
+    Parameters
+    ----------
+    n_features : int
+        Number of weights to initialize.
+    seed : int or None, optional
+        Random seed for reproducibility. If None, no reseeding is performed.
+
+    Returns
+    -------
+    np.ndarray, shape (n_features,)
+        Randomly initialized weight vector.
+    """
+    if seed is not None:
+        rng = np.random.default_rng(seed)
+    else:
+        rng = np.random.default_rng()
+
+    return rng.normal(loc=0.0, scale=0.01, size=n_features)
 
 # Step 12 - gd_step (not yet solved)
 # TODO: implement
